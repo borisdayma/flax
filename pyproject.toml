@@ -149,3 +149,4 @@ exclude_lines = [
 
 [tool.pyink]
 pyink-indentation = 2
+pyink-use-majority-quotes = true

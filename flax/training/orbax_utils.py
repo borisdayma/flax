@@ -53,6 +53,7 @@ def restore_args_from_target(target: Any, mesh: Optional[Mesh] = None) -> Any:
   Returns:
     A Pytree of Orbax `RestoreArgs` or `ArrayRestoreArgs`
   """
+
   def find_sharding(x):
     if is_multi_device_array(x):
       return x.sharding
@@ -77,7 +78,5 @@ def restore_args_from_target(target: Any, mesh: Optional[Mesh] = None) -> Any:
         DeprecationWarning,
     )
     axes_tree = jax.tree_util.tree_map(lambda s: s.spec, sharding_tree)
-    return ocp.checkpoint_utils.restore_args_from_target(
-        mesh, target, axes_tree
-    )
+    return ocp.checkpoint_utils.restore_args_from_target(mesh, target, axes_tree)
   return ocp.checkpoint_utils.construct_restore_args(target, sharding_tree)
